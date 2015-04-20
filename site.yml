@@ -1,0 +1,12 @@
+---
+- name: Install php5, nginx, mysql, and wordpress
+  hosts: wp-server
+  user: ubuntu
+  sudo: yes
+
+  roles:
+    - common
+    - mysql
+    - nginx
+    - php-fpm
+    - wordpress
