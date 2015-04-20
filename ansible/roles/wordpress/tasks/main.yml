@@ -29,4 +29,4 @@
   template: src=wp-config.php.j2 dest=/var/www/wordpress/wp-config.php
 
 - name: Change ownership of WordPress installation
-  file: path=/var/www/wordpress/ owner=www-data group=www-data state=directory recurse=yes
+  file: path=/var/www/wordpress/ owner=wordpress group=wordpress state=directory recurse=yes
