@@ -6,5 +6,11 @@
    # python-mysqldb is for Ansible.
    - python-mysqldb
 
-- name: Update root password
+- name: update .my.cnf files for admins
+  template: src=home_my.cnf.j2 dest=/home/ubuntu/.my.cnf
+
+- name: update .my.cnf file for Ansible use
+  template: src=home_my.cnf.j2 dest=/root/.my.cnf
+
+- name: update root password
   mysql_user: name=root password="{{ mysql_root_password }}"
