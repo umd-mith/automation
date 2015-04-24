@@ -13,4 +13,4 @@
   template: src=home_my.cnf.j2 dest=/root/.my.cnf
 
 - name: update root password
-  mysql_user: name=root password="{{ mysql_root_password }}"
+  mysql_user: login_user=root login_password="" name=root password="{{ mysql_root_password }}"
