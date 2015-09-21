@@ -1,0 +1,49 @@
+---
+- name: Deploy mishnah
+  hosts: tomcat-servers
+  vars: 
+    http_port: 80
+    https_port: 8443
+  user: ubuntu
+  tasks:
+    - name: install apt packages
+      apt: pkg={{ item }} update_cache=yes cache_valid_time=3600
+      sudo: True
+      with_items:
+        - git
+        - maven
+        - authbind
+        - tomcat7
+
+    - name: checkout mishnah repo
+      git: repo=https://github.com/umd-mith/mishnah.git dest=/home/ubuntu/code/mishnah accept_hostkey=yes
+      sudo: True
+
+    - name: install and package mishnah
+      shell: mvn install && mvn package chdir=/home/ubuntu/code/mishnah/cocoon/
+      sudo: True
+
+    - name: Ensure that WAR file was created
+      file: dest=/home/ubuntu/code/mishnah/cocoon/viewer/target/viewer-0.1.war state=file
+
+    - name: Copy WAR file to Tomcat webapps
+      shell: rm -rf /var/lib/tomcat7/webapps/ROOT/ && cp /home/ubuntu/code/mishnah/cocoon/viewer/target/viewer-0.1.war /var/lib/tomcat7/webapps/ROOT.war
+      sudo: True
+
+    - name: configure authbind
+      shell: sudo touch /etc/authbind/byport/80 && sudo chmod 500 /etc/authbind/byport/80 && sudo chown tomcat7 /etc/authbind/byport/80
+
+    - name: configure Tomcat (authbind=yes)
+      template: src=templates/tomcat7 dest=/etc/default/
+      sudo: True
+
+    - name: Set port http_port for Tomcat server and restart
+      template: src=templates/server.xml dest=/var/lib/tomcat7/conf/
+      sudo: True
+      notify: restart tomcat
+
+  handlers:
+    - name: restart tomcat 
+      service: name=tomcat7 state=restarted enabled=yes
+      sudo: True
+
