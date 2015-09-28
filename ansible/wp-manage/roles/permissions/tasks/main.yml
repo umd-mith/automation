@@ -1,0 +1,6 @@
+---
+- name: Change ownership of WordPress installation
+  shell: sudo chown -R www-data {{ wp_path }} && sudo chgrp -R www-data {{ wp_path }}
+
+- name: Change permissions of WordPress installation
+  shell: sudo chmod -R ug+rwX {{ wp_path }}

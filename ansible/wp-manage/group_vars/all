@@ -1,0 +1,10 @@
+---
+server_name: mith.umd.edu
+
+mysql_root_password: changeme
+
+wp_path: /var/www/html
+
+wp_db_name: changeme 
+wp_db_user: changeme
+wp_db_password: changeme
