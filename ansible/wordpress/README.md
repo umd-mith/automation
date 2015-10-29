@@ -14,3 +14,4 @@ VM just run:
     vagrant ssh
 
 [Homebrew]: http://brew.sh/
+[Vagrant]: https://www.vagrantup.com/
