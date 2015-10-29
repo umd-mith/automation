@@ -1,4 +1,4 @@
-This is an Ansible playbook for setting up a stock WordPress instance.
+This is an [Ansible] playbook for setting up a stock WordPress instance.
 
 If you are setting up a dev instance on OS X you can use [Vagrant] to 
 create a VM and install WordPress there. To get [Vagrant] running you can
@@ -15,3 +15,4 @@ VM just run:
 
 [Homebrew]: http://brew.sh/
 [Vagrant]: https://www.vagrantup.com/
+[Ansible]: http://www.ansible.com/
