@@ -1,16 +1,15 @@
 This is an Ansible playbook for setting up a stock WordPress instance.
 
-The supplied Vagrantfile will create a virtual machine, configure
-WordPress, and start it listening on http://localhost:8080/ 
-
-If you are OS X you can use [Homebrew] to install everything you need
-to use Vagrant:
+If you are setting up a dev instance on OS X you can use [Vagrant] to 
+create a VM and install WordPress there. To get [Vagrant] running you can
+use [Homebrew] to install everything you need:
 
 1. brew cask install virtualbox vagrant
 2. brew install ansible
 3. vagrant up
 
-To connect to your VM:
+Then visit http://localhost:8080 in your browser. If you want to ssh to your
+VM just run: 
 
     vagrant ssh
 
