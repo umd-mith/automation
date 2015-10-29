@@ -1,3 +1,4 @@
 ansible.cfg
 hosts
 secrets.yml
+.vagrant
