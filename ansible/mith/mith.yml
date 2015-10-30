@@ -1,0 +1,12 @@
+---
+- name: MITH WordPress website
+  hosts: wp-server
+  user: ubuntu
+  sudo: yes
+
+  roles:
+    - common
+    - mysql
+    - nginx
+    - php-fpm
+    - wordpress
