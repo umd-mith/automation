@@ -2,11 +2,11 @@
 - name: Download WordPress
   get_url: url=http://wordpress.org/wordpress-{{ wp_version }}.tar.gz dest=/home/ubuntu/wordpress-{{ wp_version }}.tar.gz sha256sum="{{ wp_sha256sum }}"
 
-- name: Ensure wordpress dir exists
-  file: dest=/var/www/wordpress state=directory
+- name: Ensure www dir exists
+  file: dest=/var/www state=directory
 
 - name: Extract archive
-  unarchive: src=/home/ubuntu/wordpress-{{ wp_version }}.tar.gz dest=/var/www/wordpress copy=no
+  unarchive: src=/home/ubuntu/wordpress-{{ wp_version }}.tar.gz dest=/var/www copy=no
 
 - name: Add group "wordpress"
   group: name=wordpress
