@@ -1,2 +1,3 @@
 [defaults]
 private_key_file=/path/to/pem/file
+vault_password_file = $HOME/.mithansible

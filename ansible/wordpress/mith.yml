@@ -9,4 +9,4 @@
     - mysql
     - nginx
     - php-fpm
-    - wordpress
+    - mith-wordpress

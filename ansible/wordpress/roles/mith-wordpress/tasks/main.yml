@@ -1,0 +1,30 @@
+---
+- name: Install duplicity
+  apt: name=duplicity state=present
+
+- name: Install boto
+  apt: name=python-boto state=present
+
+- name: Copy MITH GPG key
+  copy:
+      content: "{{ mith_key }}"
+      dest: /root/mith.key
+
+- name: Add MITH GPG key to keyring
+  command: gpg --allow-secret-key-import --import /root/mith.key
+
+- name: Remove decrypted GPG key
+  file: path=/root/mith.key state=absent
+
+- name: Copy AWS credentials
+  copy:
+      content: "{{ aws_config }}"
+      dest: /root/.boto
+
+- name: Pull latest mith WordPress files
+  environment:
+    PASSPHRASE: "{{ gpg_passphrase }}"
+  command: duplicity restore --s3-use-new-style --s3-unencrypted-connection --encrypt-key D4CF5AF773DE20B5 --file-to-restore wordpress/mith.umd.edu s3://s3.amazonaws.com/mith-server-backups/mith-wordpress-www-backup/ /var/www/mith.umd.edu
+
+# XXX: need to change the WordPress config so it doesn't point at production DB
+# and points insteat at the local MySQL

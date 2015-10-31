@@ -5,7 +5,8 @@ Vagrant.configure(2) do |config|
   config.vm.box = "ubuntu/trusty64"
   config.vm.network "forwarded_port", guest: 80, host: 8080
   config.vm.provision "ansible" do |ansible|
-    ansible.playbook = "wp.yml"
+    ansible.playbook = ENV["PLAYBOOK"] or "wp.yml"
+    ansible.playbook = "mith.yml"
     ansible.extra_vars = {
       ansible_ssh_user: "vagrant"
     }
