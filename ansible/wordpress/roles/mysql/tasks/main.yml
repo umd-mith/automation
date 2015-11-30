@@ -3,14 +3,15 @@
   apt: name={{ item }} state=present
   with_items:
    - mysql-server
-   # python-mysqldb is for Ansible.
    - python-mysqldb
 
 - name: update .my.cnf files for admins
   template: src=home_my.cnf.j2 dest=/home/ubuntu/.my.cnf
+  sudo: yes
 
-- name: update .my.cnf file for Ansible use
-  template: src=home_my.cnf.j2 dest=/root/.my.cnf
+- name: create wordpress db
+  mysql_db: name={{ db_name }} state=present
 
-- name: update root password
-  mysql_user: login_user=root login_password="" name=root password="{{ mysql_root_password }}"
+- name: create wordpress db user 
+  mysql_user: name={{ db_user }} password={{ db_password }} priv={{ db_name }}.*:ALL host='{{ db_host }}' state=present
+

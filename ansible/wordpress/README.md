@@ -23,7 +23,7 @@ directory:
 Ansible Vault allows the AWS credentials, MITH gpg key and passphrase to be
 encrypted in group_vars/all. Then you should be able to run 
 
-    PLAYBOOK=mith.yml vagrant up
+    PLAYBOOK=mithpress.yml vagrant up
 
 [Homebrew]: http://brew.sh/
 [Vagrant]: https://www.vagrantup.com/

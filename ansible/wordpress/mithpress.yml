@@ -1,6 +1,6 @@
 ---
-- name: MITH WordPress website
-  hosts: wp-server
+- name: Development MITH Website
+  hosts: local
   user: ubuntu
   sudo: yes
 
@@ -9,4 +9,5 @@
     - mysql
     - nginx
     - php-fpm
+    - wordpress
     - mith-wordpress

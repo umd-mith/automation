@@ -1,0 +1,35 @@
+---
+- name: download MITH Wordpress data
+  hosts: mith-wordpress
+  tasks:
+    - apt: name=python-mysqldb state=present
+
+    #- name: create database dump
+    #  mysql_db: 
+    #    name: "{{ mith_wordpress_production_db_name }}"
+    #    state: dump
+    #    target: /tmp/mithpressgamma.sql.bz2
+    #    login_host: "{{ mith_wordpress_production_db_host }}"
+    #    login_user: "{{ mith_wordpress_production_db_username }}"
+    #    login_password: "{{ mith_wordpress_production_db_password }}"
+
+    - name: fetch database dump
+      fetch: 
+        src: /tmp/mithpressgamma.sql.bz2
+        dest: data/
+        flat: yes
+
+    - apt: name=rsync state=present
+
+    - name: fetch wp-content
+      synchronize: 
+        src: /var/www/html/wordpress/mith.umd.edu/wp-content
+        dest: data 
+        mode: pull
+        set_remote_user: false
+        rsync_opts: "--exclude=.git"
+
+- name: test
+  hosts: wp-server
+  tasks:
+    - debug: var={{ inventory_hostname }}
