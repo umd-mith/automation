@@ -1,9 +1,22 @@
 ---
 
+- name: rewrite hostnames in sql dump
+  shell: bzcat mithpressgamma.sql.bz2  | perl -npe 's/mith\.umd\.edu/localhost:8080/g' > mithpressgamma-localhost.sql
+  args:
+    chdir: /vagrant/data
+    creates: mithpressgamma-localhost.sql
+
 - name: load mysql database
-  mysql_db: name=wordpress state=import target=/vagrant/data/mithpressgamma.sql.bz2
+  mysql_db: name=wordpress state=import target=/vagrant/data/mithpressgamma-localhost.sql
 
 - name: Copy WordPress config file
   template: src=wp-config.php.j2 dest=/var/www/wordpress/wp-config.php
 
+- name: Remove wp-content
+  file: path=/var/www/wordpress/wp-content state=absent
 
+- name: Symlink wp-content from host filesystem
+  file: path=/var/www/wordpress/wp-content src=/vagrant/data/wp-content state=link
+
+- name: Disable BBQ plugin since it does not like redirects with localhost
+  file: path=/vagrant/data/wp-content/plugins/block-bad-queries state=absent

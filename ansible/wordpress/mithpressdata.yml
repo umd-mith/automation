@@ -13,11 +13,11 @@
     #    login_user: "{{ mith_wordpress_production_db_username }}"
     #    login_password: "{{ mith_wordpress_production_db_password }}"
 
-    - name: fetch database dump
-      fetch: 
-        src: /tmp/mithpressgamma.sql.bz2
-        dest: data/
-        flat: yes
+    #- name: fetch database dump
+    #  fetch: 
+    #    src: /tmp/mithpressgamma.sql.bz2
+    #    dest: data/
+    #    flat: yes
 
     - apt: name=rsync state=present
 
@@ -29,7 +29,3 @@
         set_remote_user: false
         rsync_opts: "--exclude=.git"
 
-- name: test
-  hosts: wp-server
-  tasks:
-    - debug: var={{ inventory_hostname }}
