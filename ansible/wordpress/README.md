@@ -9,6 +9,8 @@ home directory as .mithansible
 0. install [Homebrew]
 0. `brew cask install virtualbox vagrant`
 0. `brew install ansible`
+0. clone this repository
+0. navigate to the directory containing `mithpressdata.yml` 
 0. `ansible-playbook mithpressdata.yml`
 0. `vagrant up`
 
