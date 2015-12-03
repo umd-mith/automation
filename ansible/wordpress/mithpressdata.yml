@@ -4,20 +4,20 @@
   tasks:
     - apt: name=python-mysqldb state=present
 
-    #- name: create database dump
-    #  mysql_db: 
-    #    name: "{{ mith_wordpress_production_db_name }}"
-    #    state: dump
-    #    target: /tmp/mithpressgamma.sql.bz2
-    #    login_host: "{{ mith_wordpress_production_db_host }}"
-    #    login_user: "{{ mith_wordpress_production_db_username }}"
-    #    login_password: "{{ mith_wordpress_production_db_password }}"
+    - name: create database dump
+      mysql_db: 
+        name: "{{ mith_wordpress_production_db_name }}"
+        state: dump
+        target: /tmp/mithpressgamma.sql.bz2
+        login_host: "{{ mith_wordpress_production_db_host }}"
+        login_user: "{{ mith_wordpress_production_db_username }}"
+        login_password: "{{ mith_wordpress_production_db_password }}"
 
-    #- name: fetch database dump
-    #  fetch: 
-    #    src: /tmp/mithpressgamma.sql.bz2
-    #    dest: data/
-    #    flat: yes
+    - name: fetch database dump
+      fetch: 
+        src: /tmp/mithpressgamma.sql.bz2
+        dest: data/
+        flat: yes
 
     - apt: name=rsync state=present
 
