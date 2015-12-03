@@ -4,7 +4,7 @@ instance using Vagrant.
 
 To get a local instance of the MITH website running you will need to:
 
-0. get copy of MITH's Ansible vault password from a friend and put it in your
+0. get a copy of MITH's Ansible vault password from a friend and put it in your
 home directory as .mithansible
 0. install [Homebrew]
 0. `brew cask install virtualbox vagrant`
