@@ -1,29 +1,17 @@
-This is an [Ansible] playbook for setting up a stock WordPress instance.
-Also included are different playbooks for specific Wordpress sites.
+This is an [Ansible] playbook for setting up Wordpress. It includes a
+setup for installing a local development instance of the MITH Wordpress
+instance using Vagrant.
 
-If you are setting up a dev instance on OS X you can use [Vagrant] to 
-create a VM and install WordPress there. To get [Vagrant] running you can
-use [Homebrew] to install everything you need:
+To get a local instance of the MITH website running you will need to:
 
+0. install [Homebrew]
 1. brew cask install virtualbox vagrant
 2. brew install ansible
+3. ansible-playbook mithpressdata.yml
 3. vagrant up
 
-Then visit http://localhost:8080 in your browser. If you want to ssh to your
-VM just run: 
-
-    vagrant ssh
-
-If you want to create a dev instance of mith.umd.edu Wordpress you will need 
-to first get the Ansible Vault password from a friend and put it in your home 
-directory:
-
-    ~/.mithansible
-
-Ansible Vault allows the AWS credentials, MITH gpg key and passphrase to be
-encrypted in group_vars/all. Then you should be able to run 
-
-    PLAYBOOK=mithpress.yml vagrant up
+Then visit http://localhost:8080 in your browser and you should see 
+the MITH Website!
 
 [Homebrew]: http://brew.sh/
 [Vagrant]: https://www.vagrantup.com/
