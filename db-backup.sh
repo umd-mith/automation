@@ -6,17 +6,22 @@
 # run every week since RDS rolling backups expire after a week.
 # 
 # To get this to work you'll need to:
+# 
+# 0. Put this file in /root/db-backups/
 #
 # 1. Put the RDS MySQL database host, username and password in
-#    /root/.my.cnf for mysql
+#    /root/.my.cnf for mysqldump authentication
 #
-# 2. Make sure that MITH's gpg key has been imported. 
+# 2. Make sure that MITH's gpg key has been imported
 #    See Box://MITH Box/MITH Server Public Keys/
 #
 # 3. Set AWS_ACCESS_KEY_ID, AWS_SECRET_ACCESS_KEY in the environment for the
 #    the aws command line to work. Or configure it manually by calling
-#    aws configure when logged in as root
+#    `aws configure` when logged in as root
 #    
+# 4. Set cron to run the backup every week
+#    0 0 * * 0 /root/db-backups/db-backup.sh
+# 
 
 cd /root/db-backups/
 
